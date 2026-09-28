@@ -49,8 +49,8 @@ fun Home(){
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//fun HomePreview(){
-//    Home()
-//}
+@Preview(showBackground = true)
+@Composable
+fun HomePreview(){
+    Home()
+}

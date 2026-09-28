@@ -16,12 +16,18 @@ val IvorySurface = Color(0xFFFFF9F2)
 //Wish
 val Terracotta = Color(0xFFB85C38)
 val TerracottaLight = Color(0xFFE8C0AE)
+val TerracottaMedium = Color(0xFFCB7B5A)
 
 
 val Sage = Color(0xFF667A68)
 val SageLight = Color(0xFFDDE5DA)
+val SageMedium = Color(0xFF8FA392)
+
 
 val Navy = Color(0xFF172A3A)
+val NavyLight = Color(0xFFD9E1E7)
+val NavyMedium = Color(0xFF587083)
+
 
 val TextPrimary = Color(0xFF25231F)
 val TextSecondary = Color(0xFF726C65)
@@ -29,3 +35,8 @@ val TextSecondary = Color(0xFF726C65)
 val OutlineSoft = Color(0xFFDED6CC)
 
 val ErrorEarth = Color(0xFFA33D32)
+
+// Lido
+val ReadColor = Color(0xFF2E9D5B)       // verde vivo
+val ReadingColor = Color(0xFF3F6FE5)    // azul vivo
+val WishColor = Color(0xFF9B51E0)

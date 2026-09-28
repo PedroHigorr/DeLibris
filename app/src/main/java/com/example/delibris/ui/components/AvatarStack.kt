@@ -45,14 +45,14 @@ fun AvatarStack(
 
             visibleUsers.forEachIndexed { index, users ->
 
-                val color = when(users.status){
-                    ReadingStatus.READ -> Sage
-                    ReadingStatus.READING -> Navy
-                    ReadingStatus.WISH_LIST -> Terracotta
-                    else -> Navy
-                }
+//                val color = when(users.status){
+//                    ReadingStatus.READ -> Sage
+//                    ReadingStatus.READING -> Navy
+//                    ReadingStatus.WISH_LIST -> Terracotta
+//                    else -> Navy
+//                }
 
-                Avatar(id = users.userId, color = color, modifier = Modifier.offset( x = (index * 15).dp, y = 0.dp ))
+                Avatar(id = users.userId, color = avatarBorderStatusColor(users.status), modifier = Modifier.offset( x = (index * 15).dp, y = 0.dp ))
 
             }
         }
