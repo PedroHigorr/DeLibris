@@ -42,7 +42,7 @@ fun Home(){
 
                 ShelfStatusFilter()
 
-                BookShelfItem(userBookUserConnectionModel = BookUserConnectionModel(1, 1, ReadingStatus.READ))
+//                BookShelfItem(userBookUserConnectionModel = BookUserConnectionModel(1, 1, ReadingStatus.READING))
 
             }
         }

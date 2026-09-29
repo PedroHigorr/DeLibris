@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.delibris.core.common.ReadingStatus
@@ -27,9 +30,11 @@ fun ShelfStatusFilter(
 
     var selectedFilter by remember { mutableStateOf(ShelfFilter.ALL) }
 
-    Column(modifier = modifier.fillMaxWidth().padding(start = 15.dp)) {
+    Column(modifier = modifier.fillMaxWidth()) {
 
-        Box(){
+        Box(
+            modifier = Modifier.padding(start = 20.dp)
+        ){
             Text(
                 text = "Minha Estante",
                 fontFamily = FontFamily.Monospace,
@@ -39,7 +44,8 @@ fun ShelfStatusFilter(
         }
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(5.dp)
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            modifier = Modifier.padding(start = 20.dp)
         ) {
             StatusButton(
                 text = "Todos",
@@ -66,6 +72,8 @@ fun ShelfStatusFilter(
                 selectedFilter = ShelfFilter.READING
             }
         }
+
+        BookShelfCarousel(selectedFilter)
     }
 }
 
@@ -73,7 +81,7 @@ fun ShelfStatusFilter(
 //@Composable
 //fun ReadingFilterPreview(){
 //
-//    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//        ReadingStatusFilter(modifier = Modifier.padding(innerPadding))
+//    Scaffold (modifier = Modifier.fillMaxSize()) { innerPadding ->
+//        ShelfStatusFilter(modifier = Modifier.padding(innerPadding))
 //    }
 //}

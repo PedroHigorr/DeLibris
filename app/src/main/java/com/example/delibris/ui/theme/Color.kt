@@ -38,5 +38,12 @@ val ErrorEarth = Color(0xFFA33D32)
 
 // Lido
 val ReadColor = Color(0xFF2E9D5B)       // verde vivo
+val ReadLight = Color(0xFFDDF4E6)
+
 val ReadingColor = Color(0xFF3F6FE5)    // azul vivo
+val ReadingLight = Color(0xFFE1E8FC)
+
+
 val WishColor = Color(0xFF9B51E0)
+val WishLight = Color(0xFFF0E2FA)
+

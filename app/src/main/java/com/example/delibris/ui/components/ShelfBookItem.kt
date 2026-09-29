@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -83,25 +84,30 @@ fun BookShelfItem(
 
                 Text(
                     text = book.tittle,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Bold,
-                    lineHeight = 5.sp
+                    lineHeight = 15.sp
                 )
 
                 Text(
                     book.author,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                     fontWeight = FontWeight.Light,
                     fontSize = 10.sp,
                     lineHeight = 5.sp
                 )
 
-                Text(
-                    text = userBookUserConnectionModel.status.value,
-                    fontWeight = FontWeight.Bold,
-                    color = statusColor(userBookUserConnectionModel.status),
-                    fontSize = 10.sp,
-                    lineHeight = 15.sp,
-                    modifier = Modifier.padding(top = 15.dp)
-                    )
+                Status(userBookUserConnectionModel.status, Modifier.padding(top = 15.dp))
+//                Text(
+//                    text = .value,
+//                    fontWeight = FontWeight.Bold,
+//                    color = statusColor(userBookUserConnectionModel.status),
+//                    fontSize = 10.sp,
+//                    lineHeight = 15.sp,
+//                    modifier = Modifier.padding(top = 15.dp)
+//                    )
             }
 
             Column(

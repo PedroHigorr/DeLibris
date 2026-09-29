@@ -73,16 +73,7 @@ fun BookCard(userBookConnection: BookUserConnectionModel){
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Text(
-                text = userBookConnection.status.value,
-                color = statusColor(userBookConnection.status),
-                fontSize = 10.sp,
-                lineHeight = 5.sp,
-                fontWeight = FontWeight.ExtraBold,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 15.dp)
-            )
+           Status(userBookConnection.status, modifier = Modifier.padding(end = 10.dp))
         }
         Box(){
             val users = MockUserBookConnections.usersBookConnections.filter { it.bookId == book.id }
