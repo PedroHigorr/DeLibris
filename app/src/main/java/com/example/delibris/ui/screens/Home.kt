@@ -10,12 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.delibris.core.common.ReadingStatus
-import com.example.delibris.domain.model.BookUserConnectionModel
 import com.example.delibris.ui.components.AppHeader
 import com.example.delibris.ui.components.BookCarousel
 import com.example.delibris.ui.components.BookSearchBar
-import com.example.delibris.ui.components.BookShelfItem
 import com.example.delibris.ui.components.NotificationBell
 import com.example.delibris.ui.components.ShelfStatusFilter
 import com.example.delibris.ui.theme.Ivory

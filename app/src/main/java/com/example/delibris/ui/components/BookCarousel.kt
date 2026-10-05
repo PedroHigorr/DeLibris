@@ -20,18 +20,28 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.delibris.core.common.ReadingStatus
 import com.example.delibris.domain.model.MockUserBookConnections
+import com.example.delibris.domain.model.MockUserUi
 import com.example.delibris.ui.theme.Terracotta
 
 @Composable
 fun BookCarousel(modifier: Modifier = Modifier){
+
+    //Mock de livros
+    val filter = MockUserBookConnections.usersBookConnections.filter {
+        it.userId == MockUserUi.user1.id &&
+        it.status == ReadingStatus.WISH_LIST
+    }
+        .sortedByDescending { it.date }
+    // ----
 
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(20.dp)) {
         Box(modifier = Modifier.fillMaxWidth()){
             Text(
-                text = "Lendo Agora",
+                text = "Para Ler",
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
                 fontFamily = FontFamily.Monospace,
@@ -53,8 +63,8 @@ fun BookCarousel(modifier: Modifier = Modifier){
             contentPadding = PaddingValues(horizontal = 10.dp)
         ) {
             items(
-                items = MockUserBookConnections.usersBookConnections,
-                key = { userCon -> userCon.bookId}
+                items = filter,
+                key = { userCon -> userCon.id}
             ) {userCon ->
                 BookCard(userCon)
             }

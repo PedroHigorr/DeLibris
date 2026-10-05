@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -100,14 +99,7 @@ fun BookShelfItem(
                 )
 
                 Status(userBookUserConnectionModel.status, Modifier.padding(top = 15.dp))
-//                Text(
-//                    text = .value,
-//                    fontWeight = FontWeight.Bold,
-//                    color = statusColor(userBookUserConnectionModel.status),
-//                    fontSize = 10.sp,
-//                    lineHeight = 15.sp,
-//                    modifier = Modifier.padding(top = 15.dp)
-//                    )
+
             }
 
             Column(
