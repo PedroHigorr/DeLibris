@@ -1,6 +1,9 @@
 package com.example.delibris.ui.components
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -23,22 +26,48 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.example.delibris.R
+import com.example.delibris.ui.theme.IvorySurface
+import com.example.delibris.ui.theme.OutlineSoft
+import com.example.delibris.ui.theme.Terracotta
+import com.example.delibris.ui.theme.TextPrimary
+import com.example.delibris.ui.theme.TextSecondary
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BookSearchBar( ){
+fun BookSearchBar(
+    modifier: Modifier = Modifier
+){
     val searchBarState = rememberSearchBarState(initialValue = SearchBarValue.Collapsed)
     val textField = rememberTextFieldState()
     val scope = rememberCoroutineScope()
-    val searchBarBehavior = SearchBarDefaults.enterAlwaysSearchBarScrollBehavior()
+    val searchShape = RoundedCornerShape(8.dp)
+    val searchColors = SearchBarDefaults.colors(
+        containerColor = IvorySurface,
+        inputFieldColors = SearchBarDefaults.inputFieldColors(
+            focusedContainerColor = IvorySurface,
+            unfocusedContainerColor = IvorySurface,
+            focusedTextColor = TextPrimary,
+            unfocusedTextColor = TextPrimary,
+            focusedPlaceholderColor = TextSecondary,
+            unfocusedPlaceholderColor = TextSecondary,
+            focusedLeadingIconColor = TextPrimary,
+            unfocusedLeadingIconColor = TextPrimary,
+            focusedTrailingIconColor = TextSecondary,
+            unfocusedTrailingIconColor = TextSecondary,
+            cursorColor = Terracotta
+        )
+    )
 
     val inputField  = @Composable {
         SearchBarDefaults.InputField(
             modifier = Modifier,
             searchBarState = searchBarState,
             textFieldState = textField,
+            shape = searchShape,
+            colors = searchColors.inputFieldColors,
             onSearch = { scope.launch { searchBarState.animateToCollapsed() } },
             placeholder = { Text(stringResource(R.string.search_bar_placeHolder)) },
             leadingIcon = {
@@ -66,9 +95,13 @@ fun BookSearchBar( ){
         )
     }
 
-    Box() {
+    Box(modifier = modifier) {
         SearchBar(
-            modifier = Modifier ,
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(1.dp, OutlineSoft, searchShape),
+            shape = searchShape,
+            colors = searchColors,
             state = searchBarState,
             inputField = inputField
         )

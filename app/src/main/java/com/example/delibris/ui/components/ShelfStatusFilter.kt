@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
@@ -25,15 +26,17 @@ import com.example.delibris.core.common.ShelfFilter
 
 @Composable
 fun ShelfStatusFilter(
+    selectedFilter: ShelfFilter,
+    onFilterSelected: (ShelfFilter) -> Unit,
     modifier: Modifier = Modifier
 ){
 
-    var selectedFilter by remember { mutableStateOf(ShelfFilter.ALL) }
+//    var selectedFilter by remember { mutableStateOf(ShelfFilter.ALL) }
 
     Column(modifier = modifier.fillMaxWidth()) {
 
         Box(
-            modifier = Modifier.padding(start = 20.dp)
+            modifier = Modifier.padding(start = 20.dp).fillMaxWidth()
         ){
             Text(
                 text = "Minha Estante",
@@ -51,37 +54,42 @@ fun ShelfStatusFilter(
                 text = "Todos",
                 selected = selectedFilter == ShelfFilter.ALL
                 ){
-                selectedFilter = ShelfFilter.ALL
+                onFilterSelected(ShelfFilter.ALL)
             }
             StatusButton(
                 text = ReadingStatus.READ.value,
                 selected = selectedFilter == ShelfFilter.READ
             ){
-                selectedFilter = ShelfFilter.READ
+                onFilterSelected(ShelfFilter.READ)
             }
             StatusButton(
                 text = ReadingStatus.WISH_LIST.value,
                 selected = selectedFilter == ShelfFilter.WISH_LIST
             ){
-                selectedFilter = ShelfFilter.WISH_LIST
+                onFilterSelected(ShelfFilter.WISH_LIST)
             }
             StatusButton(
                 text = ReadingStatus.READING.value,
                 selected = selectedFilter == ShelfFilter.READING
             ){
-                selectedFilter = ShelfFilter.READING
+                onFilterSelected(ShelfFilter.READING)
             }
         }
-
-        BookShelfCarousel(selectedFilter)
     }
 }
 
-//@Preview
-//@Composable
-//fun ReadingFilterPreview(){
-//
-//    Scaffold (modifier = Modifier.fillMaxSize()) { innerPadding ->
-//        ShelfStatusFilter(modifier = Modifier.padding(innerPadding))
-//    }
-//}
+@Preview
+@Composable
+fun ReadingFilterPreview(){
+    var selectedFilter by rememberSaveable {
+        mutableStateOf(ShelfFilter.ALL)
+    }
+
+    Scaffold (modifier = Modifier.fillMaxSize()) { innerPadding ->
+        ShelfStatusFilter(
+            selectedFilter =  selectedFilter,
+            onFilterSelected = {selectedFilter = it },
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+}
