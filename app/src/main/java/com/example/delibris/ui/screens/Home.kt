@@ -1,8 +1,7 @@
 package com.example.delibris.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,34 +13,34 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.delibris.core.common.ReadingStatus
 import com.example.delibris.core.common.ShelfFilter
-import com.example.delibris.domain.model.MockUserBookConnections
-import com.example.delibris.domain.model.MockUserUi
+import com.example.delibris.sample.MockBookUserConCon
+import com.example.delibris.sample.MockUserUiModel
 import com.example.delibris.ui.components.AppHeader
 import com.example.delibris.ui.components.BookCarousel
 import com.example.delibris.ui.components.BookSearchBar
-import com.example.delibris.ui.components.BookShelfCarousel
 import com.example.delibris.ui.components.BookShelfItem
 import com.example.delibris.ui.components.NotificationBell
 import com.example.delibris.ui.components.ShelfStatusFilter
 import com.example.delibris.ui.theme.Ivory
 
 @Composable
-fun Home(){
+fun Home(
+    onCardClick: (Int) -> Unit,
+    onAvatarClick: () -> Unit,
+){
 
     var selectedFilter by rememberSaveable {
         mutableStateOf(ShelfFilter.ALL)
     }
 
-    val mockUsers = MockUserBookConnections.usersBookConnections
+    val mockUsers = MockBookUserConCon.usersBookConnections
     val user = mockUsers
-        .filter { it.userId == MockUserUi.user1.id  }
+        .filter { it.userId == MockUserUiModel.user1.id  }
         .sortedByDescending { it.date }
     // -----
 
@@ -62,11 +61,6 @@ fun Home(){
         containerColor = Ivory,
         modifier = Modifier
             .fillMaxSize() ) { innerPadding ->
-//            Column(
-//                verticalArrangement = Arrangement.spacedBy(30.dp),
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                modifier = Modifier.padding(innerPadding).fillMaxSize()
-//            ) {
         LazyColumn(
             modifier = Modifier.padding(innerPadding)
         ) {
@@ -83,7 +77,9 @@ fun Home(){
 
             item {
                 BookCarousel(
-                    modifier = Modifier.padding(top = 20.dp)
+                    modifier = Modifier.padding(top = 20.dp,),
+                    onCardClick = { onCardClick(it) },
+                    onAvatarClick = onAvatarClick
                 )
             }
 
@@ -101,7 +97,11 @@ fun Home(){
                 key = { userCon -> userCon.id }
             ) {userCon ->
 
-                BookShelfItem(userCon)
+                BookShelfItem(
+                    userBookUserConnectionModel = userCon,
+                    onCardClick = { onCardClick(it) },
+                    onAvatarClick = onAvatarClick
+                    )
             }
         }
     }
@@ -111,5 +111,5 @@ fun Home(){
 @Preview(showBackground = true)
 @Composable
 fun HomePreview(){
-    Home()
+    Home(onAvatarClick = {  }, onCardClick = {})
 }

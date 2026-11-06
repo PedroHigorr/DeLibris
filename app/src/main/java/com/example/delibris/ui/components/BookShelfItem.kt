@@ -1,6 +1,7 @@
 package com.example.delibris.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,18 +29,20 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.delibris.core.common.ReadingStatus
 import com.example.delibris.domain.model.BookUserConnectionModel
-import com.example.delibris.domain.model.MockBooks
-import com.example.delibris.domain.model.MockUserBookConnections
+import com.example.delibris.sample.MockBooks
+import com.example.delibris.sample.MockBookUserConCon
 import com.example.delibris.ui.theme.OutlineSoft
 
 @Composable
 fun BookShelfItem(
     userBookUserConnectionModel: BookUserConnectionModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCardClick: (Int) -> Unit,
+    onAvatarClick: () -> Unit
 ){
 
     val book = MockBooks.books.first { it.id == userBookUserConnectionModel.bookId }
-    val user = MockUserBookConnections.usersBookConnections.filter { it.bookId == book.id }
+    val user = MockBookUserConCon.usersBookConnections.filter { it.bookId == book.id }
     Row(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier
@@ -58,7 +61,9 @@ fun BookShelfItem(
             AsyncImage(
                 model = book.coverUrl,
                 contentDescription = "Book Cover",
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable(onClick = { onCardClick(book.id) } ),
                 contentScale = ContentScale.Crop
             )
         }
@@ -77,8 +82,11 @@ fun BookShelfItem(
                         vertical = 6.dp
                     )
             ) {
+
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable(onClick = { onCardClick(book.id) } ),
                 ) {
 
                 Text(
@@ -107,19 +115,21 @@ fun BookShelfItem(
                 verticalArrangement = Arrangement.spacedBy(15.dp)
             ) {
                 Icon(Icons.Default.MoreVert, contentDescription = null)
-                AvatarStack(users = user) { }
+                AvatarStack(users = user, onAvatarClick = onAvatarClick)
             }
         }
     }
 }
 
-//@Preview
-//@Composable
-//fun BookShelfItemPreview(){
-//    Scaffold(modifier = Modifier.fillMaxWidth()) { innerPadding ->
-//        BookShelfItem(
-//            modifier = Modifier.padding(innerPadding),
-//            userBookUserConnectionModel = BookUserConnectionModel(userId = 1, bookId = 1, status = ReadingStatus.READ)
-//        )
-//    }
-//}
+@Preview
+@Composable
+fun BookShelfItemPreview(){
+    Scaffold(modifier = Modifier.fillMaxWidth()) { innerPadding ->
+        BookShelfItem(
+            onCardClick = {},
+            onAvatarClick = {},
+            modifier = Modifier.padding(innerPadding),
+            userBookUserConnectionModel = BookUserConnectionModel(id =1, userId = 1, bookId = 1, status = ReadingStatus.READ)
+        )
+    }
+}

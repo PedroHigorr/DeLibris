@@ -14,7 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.delibris.R
-import com.example.delibris.domain.model.MockUserUi
+import com.example.delibris.sample.MockUserUiModel
 import com.example.delibris.ui.theme.Navy
 
 @Composable
@@ -24,7 +24,7 @@ fun Avatar(
     color: Color = Navy
 ){
 
-    val user = MockUserUi.userList.firstOrNull(){ it.id == id}
+    val user = MockUserUiModel.userList.firstOrNull(){ it.id == id}
 
     if(user?.image != null){
         Image(

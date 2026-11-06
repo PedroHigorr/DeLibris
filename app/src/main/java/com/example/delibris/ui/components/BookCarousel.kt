@@ -21,16 +21,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.delibris.core.common.ReadingStatus
-import com.example.delibris.domain.model.MockUserBookConnections
-import com.example.delibris.domain.model.MockUserUi
+import com.example.delibris.sample.MockBookUserConCon
+import com.example.delibris.sample.MockUserUiModel
 import com.example.delibris.ui.theme.Terracotta
 
 @Composable
-fun BookCarousel(modifier: Modifier = Modifier){
+fun BookCarousel(
+    modifier: Modifier = Modifier,
+    onCardClick: (Int) -> Unit,
+    onAvatarClick: () -> Unit
+    ){
 
     //Mock de livros
-    val filter = MockUserBookConnections.usersBookConnections.filter {
-        it.userId == MockUserUi.user1.id &&
+    val filter = MockBookUserConCon.usersBookConnections.filter {
+        it.userId == MockUserUiModel.user1.id &&
         it.status == ReadingStatus.WISH_LIST
     }
         .sortedByDescending { it.date }
@@ -66,7 +70,10 @@ fun BookCarousel(modifier: Modifier = Modifier){
                 items = filter,
                 key = { userCon -> userCon.id}
             ) {userCon ->
-                BookCard(userCon)
+                BookCard(
+                    userBookConnection = userCon,
+                    onCardClick = { onCardClick(userCon.bookId) },
+                    onAvatarClick = onAvatarClick  )
             }
 
         }
@@ -77,6 +84,6 @@ fun BookCarousel(modifier: Modifier = Modifier){
 //@Composable
 //fun BookCarouselPreview(){
 //    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//        BookCarousel(modifier = Modifier.padding(innerPadding))
+//        BookCarousel(modifier = Modifier.padding(innerPadding)){}
 //    }
 //}

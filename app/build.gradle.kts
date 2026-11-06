@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    //Serialização
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -45,8 +47,10 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    //My implementations:
+
+    //Icons
     implementation("androidx.compose.material:material-icons-core")
+
     //AsyncImage
     implementation("io.coil-kt.coil3:coil-compose:3.5.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.5.0")
@@ -55,7 +59,12 @@ dependencies {
     coreLibraryDesugaring(
         "com.android.tools:desugar_jdk_libs:2.1.5"
     )
-    
+
+    //navigation 3
+    implementation("androidx.navigation3:navigation3-runtime:1.2.1")
+    implementation("androidx.navigation3:navigation3-ui:1.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.9.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

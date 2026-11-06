@@ -1,5 +1,6 @@
 package com.example.delibris.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,12 +24,16 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.delibris.core.common.ReadingStatus
 import com.example.delibris.domain.model.BookUserConnectionModel
-import com.example.delibris.domain.model.MockBooks
-import com.example.delibris.domain.model.MockUserBookConnections
+import com.example.delibris.sample.MockBookUserConCon
+import com.example.delibris.sample.MockBooks
 
 
 @Composable
-fun BookCard(userBookConnection: BookUserConnectionModel){
+fun BookCard(
+    userBookConnection: BookUserConnectionModel,
+    onCardClick: () -> Unit,
+    onAvatarClick: () -> Unit
+){
 
     val book = MockBooks.books.first{ it.id == userBookConnection.bookId}
 
@@ -36,74 +41,81 @@ fun BookCard(userBookConnection: BookUserConnectionModel){
         modifier = Modifier.width(123.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
+        Column(
+            modifier = Modifier.clickable(onClick = onCardClick),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ){
+            ElevatedCard(
+                modifier = Modifier
+                    .width(124.dp)
+                    .height(170.dp)
+            ) {
 
-        ElevatedCard(
-            modifier = Modifier
-                .width(124.dp)
-                .height(170.dp)
-        ) {
+                AsyncImage(
+                    model = book.coverUrl,
+                    contentDescription = "Book Cover",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
 
-            AsyncImage(
-                model = book.coverUrl,
-                contentDescription = "Book Cover",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
+            }
 
+            Column(modifier = Modifier.padding(vertical = 5.dp)) {
+                Text(
+                    text = book.tittle,
+                    fontFamily = FontFamily.Serif,
+                    lineHeight = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Text(
+                    text = book.author,
+                    fontSize = 10.sp,
+                    lineHeight = 5.sp,
+                    fontWeight = FontWeight.Thin,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Status(userBookConnection.status, modifier = Modifier.padding(end = 10.dp))
+            }
         }
 
-        Column() {
-            Text(
-                text = book.tittle,
-                fontFamily = FontFamily.Serif,
-                lineHeight = 15.sp,
-                fontWeight = FontWeight.Bold,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Text(
-                text = book.author,
-                fontSize = 10.sp,
-                lineHeight = 5.sp,
-                fontWeight = FontWeight.Thin,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-           Status(userBookConnection.status, modifier = Modifier.padding(end = 10.dp))
-        }
         Box(){
-            val users = MockUserBookConnections.usersBookConnections.filter { it.bookId == book.id }
+            val users = MockBookUserConCon.usersBookConnections.filter { it.bookId == book.id }
 
-            AvatarStack(users){}
+            AvatarStack(users, onAvatarClick = onAvatarClick)
         }
 
     }
 }
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun BookCardPreview() {
-//    Scaffold(
-//        modifier = Modifier.fillMaxSize()
-//    ) { innerPadding ->
-//
-//        Box(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(innerPadding)
-//                .padding(16.dp)
-//        ) {
-//            BookCard(
-//                userBookConnection = BookUserConnectionModel(
-//                    userId = 1,
-//                    bookId = 1,
-//                    status = ReadingStatus.READ
-//                )
-//            )
-//        }
-//    }
-//}
+
+@Preview(showBackground = true)
+@Composable
+fun BookCardPreview() {
+    Scaffold(
+        modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(16.dp)
+        ) {
+            BookCard(
+                userBookConnection = BookUserConnectionModel(
+                    id = 1,
+                    userId = 1,
+                    bookId = 1,
+                    status = ReadingStatus.READ
+                ),
+                {},{}
+            )
+        }
+    }
+}
