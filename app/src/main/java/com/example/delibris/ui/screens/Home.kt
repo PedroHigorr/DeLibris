@@ -1,6 +1,7 @@
 package com.example.delibris.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -62,7 +63,8 @@ fun Home(
         modifier = Modifier
             .fillMaxSize() ) { innerPadding ->
         LazyColumn(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            contentPadding = PaddingValues(bottom = 110.dp)
         ) {
             item {
                 AppHeader(modifier = Modifier.padding(bottom = 20.dp)){
