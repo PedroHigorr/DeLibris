@@ -64,7 +64,7 @@ fun DeLibrisNavigation() {
                       )
                   }
                   entry<Routes.BookRoute> {
-                      Book(id = it.bookId)
+                      Book(bookId = it.bookId)
                   }
                   entry<Routes.FriendsRoute> {
                       Friends()

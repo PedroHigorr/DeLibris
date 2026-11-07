@@ -35,7 +35,7 @@ fun ShelfStatusFilter(
     Column(modifier = modifier.fillMaxWidth()) {
 
         Box(
-            modifier = Modifier.padding(start = 20.dp).fillMaxWidth()
+            modifier = Modifier.padding(start = 15.dp).fillMaxWidth()
         ){
             Text(
                 text = "Minha Estante",
@@ -47,7 +47,7 @@ fun ShelfStatusFilter(
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(5.dp),
-            modifier = Modifier.padding(start = 20.dp)
+            modifier = Modifier.padding(start = 15.dp)
         ) {
             StatusButton(
                 text = "Todos",
