@@ -12,4 +12,10 @@ sealed interface Routes : NavKey{
 
     @Serializable
     data object FriendsRoute: Routes
+
+    @Serializable
+    data object ProfileRoute: Routes
+
+    @Serializable
+    data object CollectionsRoute: Routes
 }
