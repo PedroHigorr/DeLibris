@@ -12,9 +12,11 @@ val Pink40 = Color(0xFF7D5260)
 
 val Ivory = Color(0xFFF7F1E8)
 val IvorySurface = Color(0xFFFFF9F2)
+val IvoryHighlight = Color(0xFFFAECDA)
 
 //Wish
 val Terracotta = Color(0xFFB85C38)
+
 val TerracottaLight = Color(0xFFE8C0AE)
 val TerracottaMedium = Color(0xFFCB7B5A)
 

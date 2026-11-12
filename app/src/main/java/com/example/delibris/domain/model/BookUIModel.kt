@@ -6,7 +6,12 @@ data class BookUIModel(
     val id: Int,
     val tittle: String,
     val author: String,
+    val edition: String?,
+    val language: String?,
+    val translator: String?,
+    val isbn: String?,
     val coverUrl: String?,
+    val pageNumbers: Int?
 )
 
 

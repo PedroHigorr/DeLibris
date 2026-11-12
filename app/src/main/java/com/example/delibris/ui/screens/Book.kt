@@ -31,6 +31,7 @@ import com.example.delibris.sample.MockBookUserConCon
 import com.example.delibris.sample.MockBooks
 import com.example.delibris.sample.MockUserUiModel
 import com.example.delibris.ui.components.BookDescription
+import com.example.delibris.ui.components.BookEdition
 import com.example.delibris.ui.theme.Ivory
 
 @Composable
@@ -49,11 +50,19 @@ fun Book(
             .padding(innerPadding)
         ){
 
-            LazyColumn() {
+            LazyColumn(
+
+            ) {
                 item {
                     BookDescription(
                         bookId = bookId,
                         userId = currentUser
+                    )
+                }
+
+                item {
+                    BookEdition(
+                        bookId = bookId
                     )
                 }
             }
