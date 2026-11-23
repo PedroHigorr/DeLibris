@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,9 +19,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.delibris.ui.theme.Terracotta
 
 @Composable
@@ -31,23 +32,24 @@ fun SeeMoreButton(
 
     OutlinedButton(
         onClick = onSeeMoreClick,
-        modifier = modifier,
+        modifier = modifier.height(32.dp),
         border = BorderStroke(1.dp, Terracotta),
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = Color.Transparent
         ),
         contentPadding = PaddingValues(
-            horizontal = 12.dp,
-            vertical = 8.dp
+            horizontal = 7.dp,
+            vertical = 3.dp
         ),
     ) {
         Text(
             text = "Ver mais",
-            color = Terracotta
+            color = Terracotta,
+            fontSize = 12.sp
             )
         Spacer(Modifier.width(4.dp))
         Icon(
-            modifier = Modifier.size(20.dp),
+            modifier = Modifier.size(16.dp),
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = null,
             tint = Terracotta
