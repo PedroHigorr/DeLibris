@@ -25,23 +25,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.delibris.core.common.ReadingStatus
+import com.example.delibris.domain.model.BookUIModel
 import com.example.delibris.domain.model.BookUserConnectionModel
 import com.example.delibris.sample.MockBookUserConCon
 import com.example.delibris.sample.MockBooks
 
 @Composable
 fun BookDescription(
-    bookId: Int,
-    userId: Int
+    book: BookUIModel,
+    status: ReadingStatus
 ) {
 
-    val conUser = MockBookUserConCon.usersBookConnections.first{
-        it.userId == userId && it.bookId == bookId
-    }
-
-    val currentBook = MockBooks.books.first{
-        it.id == bookId
-    }
 
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -53,7 +47,7 @@ fun BookDescription(
                 .height(170.dp)
         ) {
             AsyncImage(
-                model = currentBook.coverUrl,
+                model = book.coverUrl,
                 contentDescription = "Book Cover",
                 contentScale = ContentScale.Crop
             )
@@ -65,7 +59,7 @@ fun BookDescription(
 
         ) {
             Text(
-                text = currentBook.tittle,
+                text = book.tittle,
                 fontFamily = FontFamily.Serif,
                 fontSize = 20.sp,
                 lineHeight = 15.sp,
@@ -75,7 +69,7 @@ fun BookDescription(
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                text = currentBook.author,
+                text = book.author,
                 fontFamily = FontFamily.Serif,
                 fontSize = 15.sp,
                 lineHeight = 15.sp,
@@ -86,7 +80,7 @@ fun BookDescription(
             )
 
             Status(
-                status = conUser.status,
+                status = status,
 
                 )
         }
@@ -98,7 +92,7 @@ fun BookDescription(
 fun  BookDesPreview(){
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)){
-            BookDescription(bookId = 1, userId = 1)
+            BookDescription(MockBooks.book15, ReadingStatus.READ)
         }
     }
 }

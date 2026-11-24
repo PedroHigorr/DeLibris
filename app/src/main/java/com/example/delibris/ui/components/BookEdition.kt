@@ -32,7 +32,7 @@ fun BookEdition(
     val mockBook = MockBooks.books.firstOrNull { it.id == bookId }
     Box(
         modifier = modifier
-            .fillMaxWidth(0.9f)
+            .fillMaxWidth()
             .border(
                 width = 1.dp,
                 color = OutlineSoft,

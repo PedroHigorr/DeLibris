@@ -18,6 +18,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -32,6 +33,7 @@ import com.example.delibris.sample.MockBooks
 import com.example.delibris.sample.MockUserUiModel
 import com.example.delibris.ui.components.BookDescription
 import com.example.delibris.ui.components.BookEdition
+import com.example.delibris.ui.components.FriendsBookBar
 import com.example.delibris.ui.theme.Ivory
 
 @Composable
@@ -40,6 +42,18 @@ fun Book(
     bookId: Int,
     ){
     val currentUser = MockUserUiModel.user1.id
+
+    val bookUserCon = MockBookUserConCon.usersBookConnections.first {
+        it.bookId == bookId && it.userId == currentUser
+    }
+
+    val users = MockBookUserConCon.usersBookConnections.filter {
+        it.bookId == bookId
+    }
+
+    val book = MockBooks.books.first {
+        it.id == bookId
+    }
 
     Scaffold(
         containerColor = Ivory,
@@ -51,18 +65,25 @@ fun Book(
         ){
 
             LazyColumn(
-
+                modifier = Modifier.padding(15.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 item {
                     BookDescription(
-                        bookId = bookId,
-                        userId = currentUser
+                        book,
+                        bookUserCon.status
                     )
                 }
 
                 item {
                     BookEdition(
                         bookId = bookId
+                    )
+                }
+
+                item {
+                    FriendsBookBar(
+                        users = users
                     )
                 }
             }
